@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-  <link href="css/bootstrap.css">
-  <link href="css/styles.css">
+  <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="css/styles.css" rel="stylesheet" type="text/css">
   <script src="js/jquery-3.6.0.js"></script>
   <script src="js/scripts.js"></script>
   <title>Palette Generator</title>
@@ -12,16 +12,16 @@
     <div class="jumbotron">
       <h1>Palette Generator</h1>
     </div>
+      <form id="formOne col-6">
+        <div class="form-group">
+          <input type="color" id="colorPick" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary" id="saveButton">Save Color</button>
+        <button type="button" class="btn btn-primary" id="randomButton">Get Random Palette</button>
+      </form>
     <div class="row">
-      <div class="col col-4">
-        <form id="formOne">
-          <div class="form-group">
-            <input type="color" id="colorPick" class="form-control">
-          </div>
-          <button type="submit" class="btn btn-primary">Save Color</button>
-        </form>
-      </div>
-    </div> <!--end row div-->
+      
+    </div>
   </div><!--end container div-->
 </body>
 </html>

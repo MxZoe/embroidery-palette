@@ -1,3 +1,7 @@
-.col-4{
+#formOne{
   text-align: center;
+}
+#colorPick{
+  text-align: center;
+  width: 9%;
 }
