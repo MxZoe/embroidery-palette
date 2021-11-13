@@ -12,6 +12,9 @@ function addDiv(counter){
 function colorID(counter){
   return "#displayColor" + counter;
 }
+function savedID(counter){
+  return "#saveColor" + counter;
+}
 
 
 
@@ -54,11 +57,21 @@ $(document).ready(function(){
     event.preventDefault();
   });
   $("#paletteButton").click(function(event){
-    for(let i = 0; i < counter; i++){
-      let divName = addSaveDiv(i);
-    $("#colorSaveRow").append(divName);
+    colorArray.sort();
+    for(let i = 0; i < colorArray.length; i++){
+      let newDiv = addSaveDiv(i);
+      let divID = savedID(i);
+      let divName = colorID(i);
+      let savedColor = colorArray[i];
+      $("#savedContainer").append(newDiv);
+      $(divID).css("background-color", savedColor);
+      $(divName).css("background-color", "#FFFFFF");
     }
-    
+    counter = 0;
+    colorArray.length = 0;
+    currentColorID= colorID(counter);
+    oldColorID = colorID(counter);
+
     event.preventDefault();
   });
 });
