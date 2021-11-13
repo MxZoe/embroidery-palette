@@ -20,57 +20,65 @@
           </div>
           <button type="submit" class="btn btn-primary" id="saveButton">Save Color</button>
           <button type="button" class="btn btn-primary" id="randomButton">Get Random Palette</button>
+          <button type="button" class="btn btn-primary" id="paletteButton">Save Palette</button>
         </form>
+        <div class="row">
+          <div class="col-4">
+            <ol id="hexList">
+            </ol>
+          </div>
+        </div><!--end row two-->
       </div>
-    <div class="col-4" id="savedColors">
-      <div class="row">
-        <div class="col-md-3" id="displayColor0">
-          <span class="displayHex" id="displayHex0">
-        </div>
-        <div class="col-md-3" id="displayColor1">
-          <span class="displayHex" id="displayHex1">
-        </div>
-        <div class="col-md-3" id="displayColor2">
-          <span class="displayHex" id="displayHex2">
-        </div>
-      </div>  
-      <div class="row">
-        <div class="col-md-3" id="displayColor3">
-          <span class="displayHex" id="displayHex3">
-        </div>
-        <div class="col-md-3" id="displayColor4">
-          <span class="displayHex" id="displayHex4">
-        </div>
-        <div class="col-md-3" id="displayColor5">
-          <span class="displayHex" id="displayHex5">
-        </div>
-      </div>  
-      <div class="row">
-        <div class="col-md-3" id="displayColor6">
-          <span class="displayHex" id="displayHex6">
-        </div>
-        <div class="col-md-3" id="displayColor7">
-          <span class="displayHex" id="displayHex7">
-        </div>
-        <div class="col-md-3" id="displayColor8">
-          <span class="displayHex" id="displayHex8">
-        </div>
-      </div>  
-      <div class="row">
-        <div class="col-md-3" id="displayColor9">
-          <span class="displayHex" id="displayHex9">
-        </div>
-        <div class="col-md-3" id="displayColor10">
-          <span class="displayHex" id="displayHex10">
-        </div>
-        <div class="col-md-3" id="displayColor11">
-          <span class="displayHex" id="displayHex11">
-        </div>
-      </div>  
-  
+      <div class="col-4" id="savedColors">
+        <div class="row">
+          <div class="col-md-3" id="displayColor0" data-value = "0">
+            1.
+          </div>
+          <div class="col-md-3" id="displayColor1" data-value = "0">
+            2.
+          </div>
+          <div class="col-md-3" id="displayColor2" data-value = "0">
+            3.
+          </div>
+        </div>  
+        <div class="row">
+          <div class="col-md-3" id="displayColor3" data-value = "0">
+            4.
+          </div>
+          <div class="col-md-3" id="displayColor4" data-value = "0">
+            5. 
+          </div>
+          <div class="col-md-3" id="displayColor5" data-value = "0">
+            6.
+          </div>
+        </div>  
+        <div class="row">
+          <div class="col-md-3" id="displayColor6" data-value = "0">
+            7.
+          </div>
+          <div class="col-md-3" id="displayColor7" data-value = "0">
+            8. 
+          </div>
+          <div class="col-md-3" id="displayColor8" data-value = "0">
+            9.
+          </div>
+        </div>  
+        <div class="row">
+          <div class="col-md-3" id="displayColor9" data-value = "0">
+            10.
+          </div>
+          <div class="col-md-3" id="displayColor10" data-value = "0">
+            11.
+          </div>
+          <div class="col-md-3" id="displayColor11" data-value = "0">
+            12.
+          </div>
+        </div>  
+      </div><!--end col-4 div-->
+    </div><!--end row one-->
+    <div class="row" id="colorSaveRow">
+
     </div>
-      
-    </div><!--end row-->
   </div><!--end container div-->
 </body>
 </html>

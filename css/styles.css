@@ -18,6 +18,13 @@
   margin: 2%;
   border: 2px solid black;
   min-height: 100px;
+  min-width: 100px;
+}
+.col-md-1{
+  margin: 1px;
+  border: 2px solid black;
+  min-height: 50px;
+  max-width: 8%;
 }
 
 .col-md-3:hover{
