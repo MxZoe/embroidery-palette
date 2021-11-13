@@ -5,3 +5,25 @@
   text-align: center;
   width: 9%;
 }
+
+#displayColor0{
+  background-color: #EAEAEA;
+}
+
+.displayHex{
+  background-color: white;
+}
+
+.col-md-3{
+  margin: 2%;
+  border: 2px solid black;
+  min-height: 100px;
+}
+
+.col-md-3:hover{
+  transform: scale(1.1);
+}
+
+#displayColor{
+  border-left: 2px solid black;
+}
