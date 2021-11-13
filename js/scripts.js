@@ -3,7 +3,10 @@ function addSaveDiv(counter){
   let divName = "<div class='col-md-1' id='saveColor" + counter +"'>" + displayNumber + ".</div>";
   return divName;
 }
-
+function addRow(counter){
+  let divName = "<div class='row' id='saveRow" + counter + "'></div>";
+  return divName;
+}
 function addDiv(counter){
   const displayNumber = counter + 1;
   let divName = "<div class='col-md-3' id='displayColor" + counter +"'>" + displayNumber + ".</div>";
@@ -25,6 +28,7 @@ $(document).ready(function(){
   let currentColorID= colorID(counter);
   let oldColorID = colorID(counter);
   let colorArray = [];
+  let rowTracker = 0;
 
   $("#colorPick").on("input", function(){
     let currentColor = $("#colorPick").val();
@@ -58,20 +62,24 @@ $(document).ready(function(){
   });
   $("#paletteButton").click(function(event){
     colorArray.sort();
+    let newRow = addRow(rowTracker);
+    let rowID = "#saveRow" + rowTracker;
+    $("#savedContainer").prepend(newRow);
     for(let i = 0; i < colorArray.length; i++){
       let newDiv = addSaveDiv(i);
       let divID = savedID(i);
       let divName = colorID(i);
       let savedColor = colorArray[i];
-      $("#savedContainer").append(newDiv);
+      $(rowID).prepend(newDiv);
       $(divID).css("background-color", savedColor);
       $(divName).css("background-color", "#FFFFFF");
     }
+    $("#hexList").empty();
     counter = 0;
     colorArray.length = 0;
     currentColorID= colorID(counter);
     oldColorID = colorID(counter);
-
+    rowTracker++;
     event.preventDefault();
   });
 });
