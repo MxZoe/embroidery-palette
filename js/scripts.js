@@ -20,9 +20,9 @@ function savedID(counter){
   return "#saveColor" + counter;
 }
 //business logic
-function randomHex(){
+function randomHex(number){
   let hexArray = [];
-  for(let i = 0; i < 12; i++){
+  for(let i = 0; i < number; i++){
     let randomColor = Math.floor(Math.random()*16777215).toString(16);
     hexArray.push(randomColor);
   }
@@ -72,7 +72,7 @@ $(document).ready(function(){
     event.preventDefault();
   });
   $("#paletteButton").click(function(event){
-    colorArray.sort();
+    colorArray = colorArray.sort();
     let newRow = addRow(rowTracker);
     let rowID = "#saveRow" + rowTracker;
     let countdown = colorArray.length;
@@ -86,7 +86,7 @@ $(document).ready(function(){
         let divName = colorID(i);
         let savedColor = colorArray[i];
         $(rowID).prepend(newDiv);
-        $(divID).css("background-color", savedColor);
+        $(divID).css("background-color", "#" + savedColor);
         $(divName).css("background-color", "#FFFFFF");
         countdown--;
       }
@@ -112,7 +112,7 @@ $(document).ready(function(){
   });
 
   $("#randomButton").click(function(event){
-    colorArray = randomHex();
+    colorArray = randomHex(12);
     for(let i = 0; i < colorArray.length; i++){
       currentColorID = colorID(i);
       $(currentColorID).css("background-color", "#" + colorArray[i]);
