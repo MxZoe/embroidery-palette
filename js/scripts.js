@@ -1,6 +1,7 @@
-function addSaveDiv(counter){
-  const displayNumber = counter + 1;
-  let divName = "<div class='col-md-1' id='saveColor" + counter +"'>" + displayNumber + ".</div>";
+//utility functions
+function addSaveDiv(counter, countdown){
+
+  let divName = "<div class='col-md-1' id='saveColor" + counter +"'>" + countdown + ".</div>";
   return divName;
 }
 function addRow(counter){
@@ -18,6 +19,15 @@ function colorID(counter){
 function savedID(counter){
   return "#saveColor" + counter;
 }
+//business logic
+function randomHex(){
+  let hexArray = [];
+  for(let i = 0; i < 12; i++){
+    let randomColor = Math.floor(Math.random()*16777215).toString(16);
+    hexArray.push(randomColor);
+  }
+  return hexArray;
+}
 
 
 
@@ -29,6 +39,7 @@ $(document).ready(function(){
   let oldColorID = colorID(counter);
   let colorArray = [];
   let rowTracker = 0;
+  let savedDisplay = false;
 
   $("#colorPick").on("input", function(){
     let currentColor = $("#colorPick").val();
@@ -64,22 +75,47 @@ $(document).ready(function(){
     colorArray.sort();
     let newRow = addRow(rowTracker);
     let rowID = "#saveRow" + rowTracker;
-    $("#savedContainer").prepend(newRow);
-    for(let i = 0; i < colorArray.length; i++){
-      let newDiv = addSaveDiv(i);
-      let divID = savedID(i);
-      let divName = colorID(i);
-      let savedColor = colorArray[i];
-      $(rowID).prepend(newDiv);
-      $(divID).css("background-color", savedColor);
-      $(divName).css("background-color", "#FFFFFF");
+    let countdown = colorArray.length;
+    if(colorArray.length === 0){
+      alert("You have not saved any colors!")
+    } else{
+      $("#savedContainer").prepend(newRow);
+      for(let i = 0; i < colorArray.length; i++){
+        let newDiv = addSaveDiv(i, countdown);
+        let divID = savedID(i);
+        let divName = colorID(i);
+        let savedColor = colorArray[i];
+        $(rowID).prepend(newDiv);
+        $(divID).css("background-color", savedColor);
+        $(divName).css("background-color", "#FFFFFF");
+        countdown--;
+      }
+      $("#hexList").empty();
+      counter = 0;
+      colorArray.length = 0;
+      currentColorID= colorID(counter);
+      oldColorID = colorID(counter);
+      rowTracker++;
+      alert("Your palette has been saved!");
     }
-    $("#hexList").empty();
-    counter = 0;
-    colorArray.length = 0;
-    currentColorID= colorID(counter);
-    oldColorID = colorID(counter);
-    rowTracker++;
+    
     event.preventDefault();
+  });
+  $("#showSavedButton").click(function(event){
+    if(savedDisplay){
+      $("#savedContainer").hide();
+      savedDisplay = false;
+    } else{
+      $("#savedContainer").show();
+      savedDisplay = true;
+    }
+  });
+
+  $("#randomButton").click(function(event){
+    colorArray = randomHex();
+    for(let i = 0; i < colorArray.length; i++){
+      currentColorID = colorID(i);
+      $(currentColorID).css("background-color", "#" + colorArray[i]);
+    }
   });
 });
