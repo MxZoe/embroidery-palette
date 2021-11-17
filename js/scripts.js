@@ -5,7 +5,7 @@ function addSaveDiv(counter, countdown){
   return divName;
 }
 function addRow(counter){
-  let divName = "<div class='row' id='saveRow" + counter + "'></div>";
+  let divName = "<div class='row paletteRow' id='saveRow" + counter + "'></div>";
   return divName;
 }
 function addDiv(counter){
@@ -19,12 +19,16 @@ function colorID(counter){
 function savedID(counter){
   return "#saveColor" + counter;
 }
+bcdfghjklmnpqrstvwxyz
 //business logic
 function randomHex(number){
   let hexArray = [];
+  if(number <= 0 ){
+    return hexArray.length=0;
+  }
   for(let i = 0; i < number; i++){
     let randomColor = Math.floor(Math.random()*16777215).toString(16);
-    hexArray.push(randomColor);
+    hexArray.push("#" + randomColor);
   }
   return hexArray;
 }
@@ -39,12 +43,13 @@ $(document).ready(function(){
   let oldColorID = colorID(counter);
   let colorArray = [];
   let rowTracker = 0;
-  let savedDisplay = false;
+  let savedDisplay = true;
 
   $("#colorPick").on("input", function(){
     let currentColor = $("#colorPick").val();
     $(currentColorID).css("background-color", currentColor);
   });
+
   $("#saveButton").click(function(event){
     if(counter <=11){
       let currentColor = $("#colorPick").val();
@@ -65,12 +70,10 @@ $(document).ready(function(){
       counter++;
       currentColorID = colorID(counter);
       $("#hexList").append("<li>" + currentColor + "</li>")
-
     };
-
-
     event.preventDefault();
   });
+
   $("#paletteButton").click(function(event){
     colorArray = colorArray.sort();
     let newRow = addRow(rowTracker);
@@ -84,9 +87,8 @@ $(document).ready(function(){
         let newDiv = addSaveDiv(i, countdown);
         let divID = savedID(i);
         let divName = colorID(i);
-        let savedColor = colorArray[i];
         $(rowID).prepend(newDiv);
-        $(divID).css("background-color", "#" + savedColor);
+        $(divID).css("background-color", "#" + colorArray[i]);
         $(divName).css("background-color", "#FFFFFF");
         countdown--;
       }
@@ -96,7 +98,7 @@ $(document).ready(function(){
       currentColorID= colorID(counter);
       oldColorID = colorID(counter);
       rowTracker++;
-      alert("Your palette has been saved!");
+      $("#savedContainer").show();
     }
     
     event.preventDefault();
@@ -109,13 +111,18 @@ $(document).ready(function(){
       $("#savedContainer").show();
       savedDisplay = true;
     }
+    event.preventDefault();
   });
 
   $("#randomButton").click(function(event){
-    colorArray = randomHex(12);
-    for(let i = 0; i < colorArray.length; i++){
-      currentColorID = colorID(i);
-      $(currentColorID).css("background-color", "#" + colorArray[i]);
+    let numberForPalette = $("#numberForRandom").val();
+    colorArray = randomHex(numberForPalette);
+    if(numberForPalette <= 0){
+      alert("please enter a positive number.")
     }
+    $("#paletteButton").click()
+
+   event.preventDefault();
+
   });
 });

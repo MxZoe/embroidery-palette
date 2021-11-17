@@ -5,10 +5,10 @@ clear div on click
 
 set div to active and set counter to proper value on click
 
-generate random palette
+make sidebar for saved colors with each palette in a accordian
 
-save palette to new row of divs (or new page)
-
+___________________________________________________________________________________
+wait for section on json
 selected color is compared to thread colors and the closest thread color is output
 
 table of thread colors is displayed
