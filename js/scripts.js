@@ -11,8 +11,8 @@ function numberInArray(hexArray, color){
 }
 
 //function to create a div for the saved colors and a number displayed in the div
-function addSaveDiv(counter, countdown){
-  let divName = "<div class='col-md-1' id='saveColor" + counter +"'>" + countdown + ".</div>";
+function addSaveDiv(counter){
+  let divName = "<div class='col-md-1' id='saveColor" + counter +"'></div>";
   return divName;
 }
 //function to create a div with class "row" and a dynamic id
@@ -22,8 +22,7 @@ function addRow(counter){
 }
 //function to create a div to display the current colors
 function addDiv(counter){
-  const displayNumber = counter + 1;
-  let divName = "<div class='col-md-3' id='displayColor" + counter +"'>" + displayNumber + ".</div>";
+  let divName = "<div class='col-md-3' id='displayColor" + counter +"'></div>";
   return divName;  
 }
 
@@ -36,7 +35,27 @@ function savedID(counter){
   return "#saveColor" + counter;
 }
 
+//business logic of Palette Object
+/*
+  Palettes get colors. Palettes can display colors. palettes can be saved. 
+  colors can be deleted or added manually. palettes can be deleted
+*/
+//business logic for Color Object
+/*function Color(hex, name){
+  //take in a hex and turns it into a HSL value
+  //has a name
+  this.hex = hex;
+  this.name = name
+  this.hue = hue;
+  this.saturation = sat;
+  this.luminosity = lum;
+}
+ Colors get added to palettes.    
+*/
 //business logic
+/*
+add a palette
+*/
 //creates an array of random hex numbers with no repeating values
 function randomHex(number){
   let hexArray = [];
@@ -57,44 +76,56 @@ function randomHex(number){
   });
   return symbolArray;
 }
-
+//don't know where this belongs
+function createAndAddDiv(id, oldID){
+  let divName = addDiv(id);
+  $(oldID).after(divName);
+}
 
 //UI logice
 $(document).ready(function(){
   let counter = 0;
+  let display = $("#display-current-color");
   let currentColorID= colorID(counter);
-  let oldColorID = colorID(counter);
+  let oldColorID = display;
   let colorArray = [];
   let rowTracker = 0;
   let savedDisplay = false;
 
-  //display the current color of the colorpicker to div
-  $("#colorPick").on("input", function(){
-    let currentColor = $("#colorPick").val();
-    $(currentColorID).css("background-color", currentColor);
+  $('#color-picker').spectrum({
+    type: "flat",
+    showInput: true,
+    showAlpha: false,
+    showPalette: false,
+    showButtons: false
   });
+
+  //display the current color of the colorpicker to div
+  $("#color-picker").on('move.spectrum', function(e, color) { 
+  let currentColor = color.toHexString(); // #ff0000
+    $(display).css("background-color", currentColor);
+  });
+
   //save the color of the color picker to the next div
+  
   $("#saveButton").click(function(event){
-    if(counter <=11){
-      let currentColor = $("#colorPick").val();
-      colorArray.push(currentColor);
-      $(currentColorID).css("background-color", currentColor);
+    let currentColor = $("#color-picker").val();
+    
+      //create and add new div to the dom
+      createAndAddDiv(counter, display)
+      //saves the currentColorID to a different variable, oldColorID
       oldColorID = currentColorID;
-      counter++;  
-      currentColorID = colorID(counter);
-      $("#hexList").append("<li>" + currentColor + "</li>")
-      
-    } else{
-      let currentColor = $("#colorPick").val();
-      let divName = addDiv(counter);
-      $(oldColorID).after(divName);
-      oldColorID = currentColorID;
+      //adds to an array
       colorArray.push(currentColor);
+      //changes the background of the div
       $(currentColorID).css("background-color", currentColor);
+      //increases a counter
       counter++;
+      //generates a new colorID using the counter and saves it to currentColorID
       currentColorID = colorID(counter);
+      //adds the hexvalue to a list.
       $("#hexList").append("<li>" + currentColor + "</li>")
-    };
+   
     event.preventDefault();
   });
   //take the saved div colors and make new divs with those colors in a new row
@@ -108,7 +139,7 @@ $(document).ready(function(){
     } else{
       $("#savedContainer").prepend(newRow);
       for(let i = 0; i < colorArray.length; i++){
-        let newDiv = addSaveDiv(i, countdown);
+        let newDiv = addSaveDiv(i);
         let divID = savedID(i);
         let divName = colorID(i);
         let savedColor = colorArray[i];
@@ -144,5 +175,5 @@ $(document).ready(function(){
     colorArray = randomHex(colorAmount);
     $("#paletteButton").click();
     event.preventDefault();
-  });
+  })
 }); 

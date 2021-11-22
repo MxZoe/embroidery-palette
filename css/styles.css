@@ -9,6 +9,10 @@
   background-color: #EAEAEA;
 }
 
+#randomAmount{
+  width: 10%;
+  margin-bottom: 2%;
+}
 .col-md-3{
   margin: 2%;
   border: 2px solid black;
@@ -39,4 +43,8 @@
   text-align: center;
   width: 9%;
   margin: 1%;
+}
+
+#display-current-color{
+  border: 5px dotted black ;
 }
