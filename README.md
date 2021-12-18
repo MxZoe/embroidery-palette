@@ -16,8 +16,8 @@
 
 ## Setup/Installation Requirements
 
-* Go to mxzoe.github.io/language-selecter to use this project.
-* You can also go to https://github.com/MxZoe/embroidery-palette to clone or download the project. Then you can navigate to the lang-selecter folder and open index.html to open the project as a local site.
+
+* You can go to https://github.com/MxZoe/embroidery-palette to clone or download the project. Then you can navigate to the lang-selecter folder and open index.html to open the project as a local site.
 
 
 ## Known Bugs
@@ -30,5 +30,4 @@
 
 Copyright (c) 2021. Zoe Weinstein}
 
-Copyright (c) _date_ _author name(s)_
  
